@@ -25,43 +25,43 @@
 
   <!-- LANDING -->
   <section class="landing">
-    <div class="landing-content">
-      <p id="typewriter"></p>
-      <div class="scroll-prompt" id="scrollPrompt">
-        <span>Scroll down to read</span>
-        <div class="arrow"></div>
+    <div class="landing-bg">
+      <div class="landing-content">
+        <p id="typewriter"></p>
+        <div class="scroll-prompt" id="scrollPrompt">
+          <span>Scroll down to read</span>
+          <div class="arrow"></div>
+        </div>
       </div>
-    </div>
-    <div class="landing-image">
-      <img id="landingImg" src="images/notebook.png" alt="Poetic visual">
     </div>
   </section>
 
   <!-- POEMS -->
   <main class="blog" id="poems">
-  <div class="search">
-    <input id="searchInput" type="text" placeholder="Search poems...">
-  </div>
+    <div class="search">
+      <input id="searchInput" type="text" placeholder="Search poems...">
+    </div>
+    <div id="poemList"></div>
 
-  <div id="poemList"></div>
+    <div class="pagination">
+      <button id="prevBtn">Previous</button>
+      <button id="nextBtn">Next</button>
+    </div>
 
-  <div class="pagination">
-    <button id="prevBtn">Previous</button>
-    <button id="nextBtn">Next</button>
-  </div>
-
-  <button id="loadMoreBtn" class="load-more">Load more</button>
-</main>
-
+    <button id="loadMoreBtn" class="load-more">Load more</button>
+  </main>
 
   <!-- NOTE -->
   <section class="note-section" id="note">
     <h2>Leave a Note for Yanush</h2>
-    <form class="note-form">
-      <input type="text" placeholder="Your name (optional)" />
-      <textarea placeholder="Your note..." required></textarea>
-      <button type="submit">Leave the note</button>
-    </form>
+    <div class="note-card">
+      <p>Write something sweet, funny or honest. I read every message.</p>
+      <form class="note-form">
+        <input type="text" placeholder="Your name (optional)" />
+        <textarea placeholder="Your note..." required></textarea>
+        <button type="submit">Leave the note</button>
+      </form>
+    </div>
   </section>
 
   <!-- CONTACT -->
