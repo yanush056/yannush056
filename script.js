@@ -39,7 +39,7 @@ to drink my feelings.`,
 
 // ---------------------
 // HOME PAGE CODE
-// HOME PAGE CODE
+// ---------------------
 if (document.getElementById("poemList")) {
 
   const poemList = document.getElementById("poemList");
@@ -64,9 +64,12 @@ if (document.getElementById("poemList")) {
     pageItems.forEach(poem => {
       poemList.innerHTML += `
         <article class="poem">
-          <h2><a href="poem.html?poem=${poem.id}">${poem.title}</a></h2>
-          <p class="excerpt">${poem.excerpt}</p>
-          <span class="read-more">Read more →</span>
+          <img src="${poem.images[0]}" alt="poem image">
+          <div>
+            <h2><a href="poem.html?poem=${poem.id}">${poem.title}</a></h2>
+            <p class="excerpt">${poem.excerpt}</p>
+            <span class="read-more">Read more →</span>
+          </div>
         </article>
       `;
     });
@@ -105,53 +108,43 @@ if (document.getElementById("poemList")) {
     displayPoems(filteredPoems);
   });
 
-  // TYPEWRITER + LANDING IMAGE
+  // TYPEWRITER FIX (CONTINUES ALL LINES)
   const lines = [
-    { text: "I write about love.", image: "images/couple.png" },
-    { text: "Mostly, about my wife, Maya.", image: "images/maya.png" },
-    { text: "Sometimes, about becoming better.", image: "images/growth.png" },
-    { text: "And sometimes, just to laugh at myself.", image: "images/humor.png" },
-    { text: "These are my poems.", image: "images/notebook.png" }
+    "I write about love.",
+    "Mostly, about my wife, Maya.",
+    "Sometimes, about becoming better.",
+    "And sometimes, just to laugh at myself.",
+    "These are my poems."
   ];
 
   const typeEl = document.getElementById("typewriter");
-  const imgEl = document.getElementById("landingImg");
   const scrollPrompt = document.getElementById("scrollPrompt");
 
   let lineIndex = 0;
   let charIndex = 0;
 
-  function typeLine() {
-    if (charIndex < lines[lineIndex].text.length) {
-      typeEl.textContent += lines[lineIndex].text.charAt(charIndex);
-      charIndex++;
-      setTimeout(typeLine, 70);
-    } else {
-      showImage();
-      setTimeout(nextLine, 1500);
-    }
-  }
-
-  function showImage() {
-    imgEl.classList.remove("visible");
-    imgEl.src = lines[lineIndex].image;
-    setTimeout(() => imgEl.classList.add("visible"), 200);
-  }
-
-  function nextLine() {
-    charIndex = 0;
-    typeEl.textContent = "";
-    lineIndex++;
-
-    if (lineIndex < lines.length) {
-      setTimeout(typeLine, 500);
-    } else {
+  function type() {
+    if (lineIndex >= lines.length) {
       scrollPrompt.style.display = "flex";
+      return;
+    }
+
+    if (charIndex < lines[lineIndex].length) {
+      typeEl.textContent += lines[lineIndex].charAt(charIndex);
+      charIndex++;
+      setTimeout(type, 70);
+    } else {
+      // after finishing a line
+      typeEl.textContent += "\n";
+      lineIndex++;
+      charIndex = 0;
+      setTimeout(type, 400);
     }
   }
 
-  typeLine();
+  type();
 }
+
 
 // ---------------------
 // POEM PAGE CODE
@@ -211,6 +204,8 @@ toggle.forEach(btn => {
     document.body.classList.toggle('dark');
   });
 });
+
+
 // SMOOTH SCROLL
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
@@ -220,4 +215,3 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
   });
 });
-
