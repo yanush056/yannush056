@@ -11,6 +11,7 @@ body {
   color: #e4e4e4;
 }
 
+/* NAVBAR */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -52,13 +53,19 @@ body {
   font-size: 1.2rem;
 }
 
-/* FULL WIDTH LANDING */
+/* LANDING (FULL WIDTH NO OVERLAY) */
 .landing {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   height: 90vh;
-  padding: 0 60px;
+  position: relative;
+}
+
+.landing-bg {
+  background: url("images/notebook.png") center/cover no-repeat;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 80px;
 }
 
 .landing-content {
@@ -66,8 +73,10 @@ body {
 }
 
 #typewriter {
-  font-size: 2.2rem;
+  font-size: 2.4rem;
   line-height: 1.4;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.6);
 }
 
 #typewriter::after {
@@ -79,34 +88,21 @@ body {
   50% { opacity: 0; }
 }
 
-.landing-image img {
-  width: 520px;
-  height: 340px;
-  object-fit: cover;
-  border-radius: 12px;
-  opacity: 0;
-  transition: opacity 1.5s ease;
-}
-
-.landing-image img.visible {
-  opacity: 1;
-}
-
 .scroll-prompt {
   margin-top: 2rem;
   display: none;
   flex-direction: column;
   align-items: center;
   gap: 0.4rem;
-  color: #666;
+  color: #fff;
   font-style: italic;
 }
 
 .scroll-prompt .arrow {
   width: 16px;
   height: 16px;
-  border-right: 2px solid #666;
-  border-bottom: 2px solid #666;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
   transform: rotate(45deg);
   animation: arrowMove 1s infinite;
 }
@@ -117,7 +113,7 @@ body {
   100% { transform: translateY(0) rotate(45deg); }
 }
 
-/* POEMS */
+/* POEMS (MINI POST CARDS) */
 .blog {
   width: 100%;
   padding: 60px;
@@ -135,8 +131,18 @@ body {
 }
 
 .poem {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 30px;
   padding: 25px 0;
   border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.poem img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 12px;
 }
 
 .poem h2 {
@@ -160,10 +166,53 @@ body {
   cursor: pointer;
 }
 
-/* NOTE */
+/* PAGINATION */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.pagination button,
+.load-more {
+  padding: 10px 18px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  background: none;
+  cursor: pointer;
+}
+
+.load-more {
+  display: block;
+  margin: 30px auto;
+}
+
+/* NOTE SECTION (UPGRADED) */
 .note-section {
   padding: 60px;
   background: rgba(0,0,0,0.03);
+}
+
+.note-section h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.note-card {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.note-card p {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  color: #333;
 }
 
 .note-form input,
@@ -171,7 +220,7 @@ body {
   width: 100%;
   padding: 12px;
   margin-bottom: 12px;
-  border-radius: 6px;
+  border-radius: 10px;
   border: 1px solid #ccc;
 }
 
@@ -254,25 +303,3 @@ body {
   font-style: italic;
   color: inherit;
 }
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 25px;
-}
-
-.pagination button,
-.load-more {
-  padding: 10px 18px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
-  background: none;
-  cursor: pointer;
-}
-
-.load-more {
-  display: block;
-  margin: 30px auto;
-}
-
