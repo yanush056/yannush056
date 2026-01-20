@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yanush | Poems for Maya & Me</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">Yanush</div>
+    <nav>
+      <a href="#poems">Poems</a>
+      <a href="#contact">Contact</a>
+      <a href="#note">Leave a note</a>
+    </nav>
+    <div class="nav-right">
+      <a href="https://instagram.com" target="_blank">IG</a>
+      <a href="https://twitter.com" target="_blank">TW</a>
+      <button id="darkToggle" class="dark-toggle">🌙</button>
+    </div>
+  </header>
+
+  <!-- LANDING -->
+  <section class="landing">
+    <div class="landing-content">
+      <p id="typewriter"></p>
+      <div class="scroll-prompt" id="scrollPrompt">
+        <span>Scroll down to read</span>
+        <div class="arrow"></div>
+      </div>
+    </div>
+    <div class="landing-image">
+      <img id="landingImg" src="images/notebook.png" alt="Poetic visual">
+    </div>
+  </section>
+
+  <!-- POEMS -->
+  <main class="blog" id="poems">
+  <div class="search">
+    <input id="searchInput" type="text" placeholder="Search poems...">
+  </div>
+
+  <div id="poemList"></div>
+
+  <div class="pagination">
+    <button id="prevBtn">Previous</button>
+    <button id="nextBtn">Next</button>
+  </div>
+
+  <button id="loadMoreBtn" class="load-more">Load more</button>
+</main>
+
+
+  <!-- NOTE -->
+  <section class="note-section" id="note">
+    <h2>Leave a Note for Yanush</h2>
+    <form class="note-form">
+      <input type="text" placeholder="Your name (optional)" />
+      <textarea placeholder="Your note..." required></textarea>
+      <button type="submit">Leave the note</button>
+    </form>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <h2>Contact</h2>
+    <p>Email: yanush@example.com</p>
+    <p>Instagram: @yanushpoetry</p>
+  </section>
+
+  <footer>
+    <p>© Yanush — written with love.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
