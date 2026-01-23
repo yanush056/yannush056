@@ -1,217 +1,96 @@
-// POEMS DATA
-const poems = [
-  {
-    id: 1,
-    title: "For Maya, Always",
-    category: "love",
-    excerpt: "I loved you before I learned how to explain love…\nand I still do,",
-    text: `I loved you before I learned how to explain love…
-and I still do,
-every day,
-in better words.
-You are my sunrise and my home.`,
-    images: ["images/couple.png", "images/maya.png"]
-  },
-  {
-    id: 2,
-    title: "Learning Slowly",
-    category: "growth",
-    excerpt: "I used to fear the slow,\nnow I call it progress.",
-    text: `I used to fear the slow,
-now I call it progress.
-Every small step
-is a quiet victory.`,
-    images: ["images/growth.png", "images/notebook.png"]
-  },
-  {
-    id: 3,
-    title: "My Coffee",
-    category: "humor",
-    excerpt: "I spilled coffee on my thoughts,\nnow my brain is caffeinated.",
-    text: `I spilled coffee on my thoughts,
-now my brain is caffeinated.
-I’m still trying
-to drink my feelings.`,
-    images: ["images/humor.png", "images/notebook.png"]
-  }
-];
+document.addEventListener("DOMContentLoaded", () => {
 
+  /* MOBILE MENU */
+  const menuIcon = document.getElementById("menuIcon");
+  const navMenu = document.getElementById("navMenu");
 
-// ---------------------
-// HOME PAGE CODE
-// ---------------------
-if (document.getElementById("poemList")) {
-
-  const poemList = document.getElementById("poemList");
-  const searchInput = document.getElementById("searchInput");
-  const prevBtn = document.getElementById("prevBtn");
-  const nextBtn = document.getElementById("nextBtn");
-  const loadMoreBtn = document.getElementById("loadMoreBtn");
-
-  let currentPage = 1;
-  const perPage = 3;
-
-  function paginate(list) {
-    const start = (currentPage - 1) * perPage;
-    const end = start + perPage;
-    return list.slice(start, end);
-  }
-
-  function displayPoems(list) {
-    poemList.innerHTML = "";
-    const pageItems = paginate(list);
-
-    pageItems.forEach(poem => {
-      poemList.innerHTML += `
-        <article class="poem">
-          <img src="${poem.images[0]}" alt="poem image">
-          <div>
-            <h2><a href="poem.html?poem=${poem.id}">${poem.title}</a></h2>
-            <p class="excerpt">${poem.excerpt}</p>
-            <span class="read-more">Read more →</span>
-          </div>
-        </article>
-      `;
+  if (menuIcon) {
+    menuIcon.addEventListener("click", () => {
+      navMenu.style.display =
+        navMenu.style.display === "flex" ? "none" : "flex";
     });
-
-    // disable buttons
-    prevBtn.disabled = currentPage === 1;
-    nextBtn.disabled = currentPage * perPage >= list.length;
   }
 
-  let filteredPoems = poems;
+  /* TYPEWRITER */
+  const typeEl = document.getElementById("typewriter");
+  if (typeEl) {
+    const lines = [
+      "I write about love.",
+      "Mostly about my wife, Maya.",
+      "Sometimes about growth.",
+      "Sometimes just to laugh."
+    ];
 
-  displayPoems(filteredPoems);
+    let line = 0;
+    let char = 0;
 
-  // SEARCH
-  searchInput.addEventListener("input", (e) => {
-    const query = e.target.value.toLowerCase();
-    filteredPoems = poems.filter(p => p.title.toLowerCase().includes(query) || p.excerpt.toLowerCase().includes(query));
-    currentPage = 1;
-    displayPoems(filteredPoems);
-  });
+    function type() {
+      if (line >= lines.length) return;
 
-  // NEXT / PREV
-  nextBtn.addEventListener("click", () => {
-    currentPage++;
-    displayPoems(filteredPoems);
-  });
+      if (char < lines[line].length) {
+        typeEl.textContent += lines[line][char];
+        char++;
+        setTimeout(type, 60);
+      } else {
+        typeEl.textContent += "\n";
+        line++;
+        char = 0;
+        setTimeout(type, 400);
+      }
+    }
+    type();
+  }
 
-  prevBtn.addEventListener("click", () => {
-    currentPage--;
-    displayPoems(filteredPoems);
-  });
-
-  // LOAD MORE
-  loadMoreBtn.addEventListener("click", () => {
-    currentPage++;
-    displayPoems(filteredPoems);
-  });
-
-  // TYPEWRITER FIX (CONTINUES ALL LINES)
-  const lines = [
-    "I write about love.",
-    "Mostly, about my wife, Maya.",
-    "Sometimes, about becoming better.",
-    "And sometimes, just to laugh at myself.",
-    "These are my poems."
+  /* POEMS DATA */
+  const poems = [
+    {
+      id: 1,
+      title: "For Maya",
+      excerpt: "Loving you was never a decision...",
+      text: "Loving you was never a decision.\nIt was gravity.",
+      image: "images/love.png"
+    },
+    {
+      id: 2,
+      title: "Becoming",
+      excerpt: "I am not late, I am learning...",
+      text: "I am not late.\nI am learning.",
+      image: "images/growth.png"
+    },
+    {
+      id: 3,
+      title: "Coffee Thoughts",
+      excerpt: "I spilled my confidence...",
+      text: "I spilled my confidence\nalong with my coffee.",
+      image: "images/humor.png"
+    }
   ];
 
-  const typeEl = document.getElementById("typewriter");
-  const scrollPrompt = document.getElementById("scrollPrompt");
-
-  let lineIndex = 0;
-  let charIndex = 0;
-
-  function type() {
-    if (lineIndex >= lines.length) {
-      scrollPrompt.style.display = "flex";
-      return;
-    }
-
-    if (charIndex < lines[lineIndex].length) {
-      typeEl.textContent += lines[lineIndex].charAt(charIndex);
-      charIndex++;
-      setTimeout(type, 70);
-    } else {
-      // after finishing a line
-      typeEl.textContent += "\n";
-      lineIndex++;
-      charIndex = 0;
-      setTimeout(type, 400);
-    }
-  }
-
-  type();
-}
-
-
-// ---------------------
-// POEM PAGE CODE
-// ---------------------
-if (document.getElementById("poemTitle")) {
-
-  const urlParams = new URLSearchParams(window.location.search);
-  const poemId = parseInt(urlParams.get('poem') || 1);
-  const poem = poems.find(p => p.id === poemId);
-
-  document.getElementById("poemTitle").innerText = poem.title;
-  document.getElementById("poemText").innerText = poem.text;
-
-  const gallery = document.getElementById("gallery");
-  poem.images.forEach(img => {
-    gallery.innerHTML += `<img src="${img}" alt="poem image">`;
-  });
-
-  // COMMENTS
-  const commentForm = document.getElementById("commentForm");
-  const commentList = document.getElementById("commentList");
-
-  function displayComments() {
-    const comments = JSON.parse(localStorage.getItem(`comments_${poemId}`) || "[]");
-    commentList.innerHTML = "";
-    comments.forEach(c => {
-      commentList.innerHTML += `
-        <div class="comment-item">
-          <strong>${c.name || "Anonymous"}</strong>
-          <p>${c.text}</p>
+  /* HOME PAGE */
+  const list = document.querySelector(".poem-list");
+  if (list) {
+    poems.forEach(p => {
+      list.innerHTML += `
+        <div class="poem-card" onclick="location.href='poem.html?id=${p.id}'">
+          <img src="${p.image}">
+          <div>
+            <h2>${p.title}</h2>
+            <p>${p.excerpt}</p>
+          </div>
         </div>
       `;
     });
   }
 
-  commentForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const name = document.getElementById("commentName").value;
-    const text = document.getElementById("commentText").value;
+  /* POEM PAGE */
+  const titleEl = document.getElementById("poemTitle");
+  if (titleEl) {
+    const id = new URLSearchParams(window.location.search).get("id");
+    const poem = poems.find(p => p.id == id) || poems[0];
 
-    const comments = JSON.parse(localStorage.getItem(`comments_${poemId}`) || "[]");
-    comments.push({ name, text });
-    localStorage.setItem(`comments_${poemId}`, JSON.stringify(comments));
+    titleEl.textContent = poem.title;
+    document.getElementById("poemText").textContent = poem.text;
+    document.getElementById("poemImage").src = poem.image;
+  }
 
-    commentForm.reset();
-    displayComments();
-  });
-
-  displayComments();
-}
-
-
-// DARK MODE (Works on both pages)
-const toggle = document.querySelectorAll('#darkToggle');
-toggle.forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.body.classList.toggle('dark');
-  });
-});
-
-
-// SMOOTH SCROLL
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute('href')).scrollIntoView({
-      behavior: 'smooth'
-    });
-  });
 });
