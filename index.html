@@ -3,78 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Yanush | Poems for Maya & Me</title>
+  <title>Yanush | Poetry</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <header class="navbar">
-    <div class="logo">Yanush</div>
-    <nav>
-      <a href="#poems">Poems</a>
-      <a href="#contact">Contact</a>
-      <a href="#note">Leave a note</a>
-    </nav>
-    <div class="nav-right">
-      <a href="https://instagram.com" target="_blank">IG</a>
-      <a href="https://twitter.com" target="_blank">TW</a>
-      <button id="darkToggle" class="dark-toggle">🌙</button>
-    </div>
-  </header>
+<header class="navbar">
+  <div class="logo">Yanush</div>
 
-  <!-- LANDING -->
-  <section class="landing">
-    <div class="landing-bg">
-      <div class="landing-content">
-        <p id="typewriter"></p>
-        <div class="scroll-prompt" id="scrollPrompt">
-          <span>Scroll down to read</span>
-          <div class="arrow"></div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <button class="menu-icon" id="menuIcon">☰</button>
 
-  <!-- POEMS -->
-  <main class="blog" id="poems">
-    <div class="search">
-      <input id="searchInput" type="text" placeholder="Search poems...">
-    </div>
-    <div id="poemList"></div>
+  <nav id="navMenu">
+    <a href="#poems">Poems</a>
+    <a href="#note">Leave a note</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-    <div class="pagination">
-      <button id="prevBtn">Previous</button>
-      <button id="nextBtn">Next</button>
-    </div>
+  <div class="social">
+    <a href="#">IG</a>
+    <a href="#">TW</a>
+  </div>
+</header>
 
-    <button id="loadMoreBtn" class="load-more">Load more</button>
-  </main>
+<section class="hero">
+  <img src="images/hero.png" alt="Hero image">
+  <div class="hero-text">
+    <p id="typewriter"></p>
+    <p class="scroll">↓ scroll ↓</p>
+  </div>
+</section>
 
-  <!-- NOTE -->
-  <section class="note-section" id="note">
-    <h2>Leave a Note for Yanush</h2>
-    <div class="note-card">
-      <p>Write something sweet, funny or honest. I read every message.</p>
-      <form class="note-form">
-        <input type="text" placeholder="Your name (optional)" />
-        <textarea placeholder="Your note..." required></textarea>
-        <button type="submit">Leave the note</button>
-      </form>
-    </div>
-  </section>
+<main id="poems" class="poem-list"></main>
 
-  <!-- CONTACT -->
-  <section class="contact" id="contact">
-    <h2>Contact</h2>
-    <p>Email: yanush@example.com</p>
-    <p>Instagram: @yanushpoetry</p>
-  </section>
+<section id="note" class="note">
+  <h2>Leave a note for Yanush</h2>
+  <form>
+    <input type="text" placeholder="Your name (optional)">
+    <textarea placeholder="Your note..." required></textarea>
+    <button type="submit">Send</button>
+  </form>
+</section>
 
-  <footer>
-    <p>© Yanush — written with love.</p>
-  </footer>
+<section id="contact" class="contact">
+  <h2>Contact</h2>
+  <p>Email: yanush@example.com</p>
+</section>
 
-  <script src="script.js"></script>
+<footer>
+  © Yanush — written softly.
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
